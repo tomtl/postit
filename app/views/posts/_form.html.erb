@@ -14,19 +14,9 @@
       <%= f.label :description %>
       <%= f.text_area :description, row: 5 %>
     </div>
-    
-    <!--<div class='control-group'>-->
-    <!--  <select name='post[category_ids][]' multiple='multiple'>-->
-    <!--    <% Category.all.each do |category| %>-->
-    <!--      <option value=category.id><%= category.name %></option>-->
-    <!--    <% end %>-->
-    <!--  </select>-->
-    <!--</div>-->
-    
     <div class='control-group'>
       <%= f.collection_select :category_ids, Category.all, :id, :name, {}, {multiple: true}%>
     </div>
-
     <%= f.submit (@post.new_record? ? 'Create Post' : 'Update Post'), class:'btn btn-primary' %>
   <% end %>
 </div>
