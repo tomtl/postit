@@ -30,6 +30,6 @@
     <em>"<%= comment.body %>"</em>
     <br/>
     <span class='quiet'>by</span> <%= link_to comment.creator.username, '' %>
-    <small>at <%= comment.created_at %></small>
+    <small><%= time_ago_in_words comment.created_at %> ago.</small>
   </div>
 <% end %>
