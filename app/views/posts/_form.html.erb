@@ -15,7 +15,8 @@
       <%= f.text_area :description, row: 5 %>
     </div>
     <div class='control-group'>
-      <%= f.collection_select :category_ids, Category.all, :id, :name, {}, {multiple: true}%>
+      <%= f.label :categories %>
+      <%= f.collection_select :category_ids, Category.all, :id, :name, {}, {multiple: true} %>
     </div>
     <%= f.submit (@post.new_record? ? 'Create Post' : 'Update Post'), class:'btn btn-primary' %>
   <% end %>
