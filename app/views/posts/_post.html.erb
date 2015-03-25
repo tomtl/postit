@@ -12,7 +12,7 @@
     <% end %>
     
     <p>
-      <span class='quiet'>posted by </span><%= post.creator.username %>
+      <span class='quiet'>posted by </span><%= link_to post.creator.username, user_path(post.user_id) %>
       <small>at <%= display_datetime post.created_at %>.</small>
     </p>
 

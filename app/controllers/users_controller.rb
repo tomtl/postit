@@ -8,10 +8,16 @@ class UsersController < ApplicationController
     
     if @user.save
       flash[:notice] = "User has been saved."
+      session[:user_id] = @user.id
       redirect_to root_path
     else
       render :new
     end
+  end
+
+  def show
+    @user = User.find(params[:id])
+    @posts = Post.where(creator: @user)
   end
 
   def edit

@@ -33,7 +33,7 @@
   <div class='well span8'>
     <em>"<%= comment.body %>"</em>
     <br/>
-    <span class='quiet'>by</span> <%= link_to comment.creator.username, '' %>
+    <span class='quiet'>by</span> <%= link_to comment.creator.username, user_path(comment.user_id) %>
     <small><%= time_ago_in_words comment.created_at %> ago.</small>
   </div>
 <% end %>
