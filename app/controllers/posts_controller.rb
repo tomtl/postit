@@ -28,14 +28,6 @@ class PostsController < ApplicationController
   end
   
   def edit
-    # @post = Post.find(params[:id])
-    
-    # if current_user == @post.creator
-    #   redirect_to edit_post_path(@post)
-    # else
-    #   flash[:error] = "You must be the post creator to do that."
-    #   redirect_to post_path(@post)
-    # end
   end
   
   def update
@@ -55,5 +47,12 @@ class PostsController < ApplicationController
     def set_post
       @post = Post.find(params[:id])
     end
-  
+    
+    def require_creator
+      if current_user != @post.creator
+        flash[:error] = "You must be the post creator to do that."
+        redirect_to root_path
+      end
+    end
+    
 end
