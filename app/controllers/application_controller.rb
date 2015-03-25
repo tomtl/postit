@@ -14,8 +14,17 @@ class ApplicationController < ActionController::Base
   end
   
   def require_user
-    if !logged_in
+    if !logged_in?
       flash[:error] = "Must be logged in to do that."
+      redirect_to root_path
+    end
+  end
+  
+  def require_creator
+    @post = Post.find(params[:id])
+    
+    if current_user != @post.creator
+      flash[:error] = "You must be the post creator to do that."
       redirect_to root_path
     end
   end

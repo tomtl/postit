@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update]
+  before_action :require_user, except: [:index, :show]
+  before_action :require_creator, only: [:edit, :update]
   
   def index
     @posts = Post.all
@@ -15,7 +17,7 @@ class PostsController < ApplicationController
   
   def create
     @post = Post.new(post_params)
-    @post.creator = User.first   # TODO: Change once authentication is added
+    @post.creator = current_user
     
     if @post.save
       flash[:notice] = "Your post has been created."
@@ -25,7 +27,16 @@ class PostsController < ApplicationController
     end
   end
   
-  def edit; end
+  def edit
+    # @post = Post.find(params[:id])
+    
+    # if current_user == @post.creator
+    #   redirect_to edit_post_path(@post)
+    # else
+    #   flash[:error] = "You must be the post creator to do that."
+    #   redirect_to post_path(@post)
+    # end
+  end
   
   def update
     if @post.update(post_params)

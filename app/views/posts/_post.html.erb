@@ -2,10 +2,19 @@
   <div class='span8 well'>
     <%= render post.categories %>
     <h4><%= link_to post.title, post_path(post.id) %></h4>
+    <p><%= link_to post.url, fix_url(post.url) %></p>
     <p><%= post.description %></p>
+
+    <% if current_user == post.creator %>
+      <p class='pull-right'>
+        <%= link_to 'edit this post', edit_post_path(post) %>
+      </p>
+    <% end %>
+    
     <p>
       <span class='quiet'>posted by </span><%= post.creator.username %>
       <small>at <%= display_datetime post.created_at %>.</small>
     </p>
+
   </div>
 </div>
