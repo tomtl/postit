@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
+  before_action :set_post
   before_action :require_user
 
   def create
-    @post = Post.find(params[:post_id])
     @comment = @post.comments.build(params.require(:comment).permit(:body))
     @comment.creator = current_user
 
@@ -15,7 +15,6 @@ class CommentsController < ApplicationController
   end
 
   def vote
-    @post = Post.find(params[:post_id])
     @comment = Comment.find(params[:id])
     @vote = Vote.create(vote: params[:vote], creator: current_user, voteable: @comment)
 
@@ -24,7 +23,13 @@ class CommentsController < ApplicationController
       redirect_to :back
     else
       flash[:error] = "You can only vote once on that."
-      redirect_to post_path(@post)
+      redirect_to :back # post_path(@post)
     end
   end
+
+  private
+    def set_post
+      @post = Post.find(params[:post_id])
+    end
+
 end

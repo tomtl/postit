@@ -1,23 +1,23 @@
 <div class="row">
   <div class='span0 well text-center'>
-    <div class='span0 well text-center'>
-      <%= link_to vote_post_path(post, vote: true), method: 'post' do %>
-        <i class='icon-arrow-up'></i>
-      <% end %>
-      <br/>
-      <%= post.total_votes %>
-      <br/>
-      <%= link_to vote_post_path(post, vote: false), method: 'post' do %>
-        <i class='icon-arrow-down'></i>
-      <% end %>
-    </div>
+    <%= link_to vote_post_path(post, vote: true), method: 'post' do %>
+      <i class='icon-arrow-up'></i>
+    <% end %>
+    <br/>
+    <%= pluralize(post.total_votes, "vote") %>
+    <br/>
+    <%= link_to vote_post_path(post, vote: false), method: 'post' do %>
+      <i class='icon-arrow-down'></i>
+    <% end %>
   </div>
 
   <div class='span8 well'>
     <%= render post.categories %>
     <h4><%= link_to post.title, post_path(post.id) %></h4>
-    <p><%= link_to post.url, fix_url(post.url) %></p>
-    <p><%= post.description %></p>
+    <p>
+      <%= link_to post.url, fix_url(post.url) %>:
+      <%= post.description %>
+    </p>
 
     <% if current_user == post.creator %>
       <p class='pull-right'>
@@ -28,6 +28,10 @@
     <p>
       <span class='quiet'>posted by </span><%= link_to post.creator.username, user_path(post.creator) %>
       <small>at <%= display_datetime post.created_at %>.</small>
+    </p>
+
+    <p>
+      <em><%= link_to "#{post.comments.size} comments", post_path(post.id) %></em>
     </p>
 
   </div>

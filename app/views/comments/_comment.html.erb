@@ -6,13 +6,13 @@
       <i class='icon-arrow-up'></i>
     <% end %>
     <br/>
-    <%= comment.total_votes %>
+    <%= pluralize(comment.total_votes, 'vote') %>
     <br/>
     <%= link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post' do %>
       <i class='icon-arrow-down'></i>
     <% end %>
   </div>
-  
+
   <div class='well span8'>
     <em>"<%= comment.body %>"</em>
     <% if show_post %>
