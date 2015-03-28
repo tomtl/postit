@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
       redirect_to :back
     else
       flash[:error] = "You can only vote once on that."
-      render 'posts/show'
+      redirect_to post_path(@post)
     end
   end
 end
