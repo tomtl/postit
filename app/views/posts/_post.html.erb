@@ -1,15 +1,17 @@
 <div class="row">
-  <div class='span0 well text-center'>
-    <%= link_to vote_post_path(post, vote: true), method: 'post' do %>
-      <i class='icon-arrow-up'></i>
-    <% end %>
-    <br/>
-    <%= pluralize(post.total_votes, "vote") %>
-    <br/>
-    <%= link_to vote_post_path(post, vote: false), method: 'post' do %>
-      <i class='icon-arrow-down'></i>
-    <% end %>
-  </div>
+  <% if logged_in? %>
+    <div class='span0 well text-center'>
+      <%= link_to vote_post_path(post, vote: true), method: 'post' do %>
+        <i class='icon-arrow-up'></i>
+      <% end %>
+      <br/>
+      <%= pluralize(post.total_votes, "vote") %>
+      <br/>
+      <%= link_to vote_post_path(post, vote: false), method: 'post' do %>
+        <i class='icon-arrow-down'></i>
+      <% end %>
+    </div>
+  <% end %>
 
   <div class='span8 well'>
     <%= render post.categories %>
