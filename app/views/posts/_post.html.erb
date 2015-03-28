@@ -1,17 +1,20 @@
 <div class="row">
-  <% if logged_in? %>
-    <div class='span0 well text-center'>
+  <div class='span0 well text-center'>
+    <% if logged_in? %>
       <%= link_to vote_post_path(post, vote: true), method: 'post' do %>
         <i class='icon-arrow-up'></i>
       <% end %>
-      <br/>
-      <%= pluralize(post.total_votes, "vote") %>
-      <br/>
+    <% end %>
+    <br/>
+    <%= pluralize(post.total_votes, "vote") %>
+    <br/>
+    <% if logged_in? %>
       <%= link_to vote_post_path(post, vote: false), method: 'post' do %>
         <i class='icon-arrow-down'></i>
       <% end %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
+
 
   <div class='span8 well'>
     <%= render post.categories %>
@@ -33,7 +36,7 @@
     </p>
 
     <p>
-      <em><%= link_to "#{post.comments.size} comments", post_path(post.id) %></em>
+      <em><%= link_to pluralize(post.comments.size, "comment"), post_path(post.id) %></em>
     </p>
 
   </div>
