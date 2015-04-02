@@ -6,7 +6,7 @@
       <% end %>
     <% end %>
     <br/>
-    <span id='post_<%=post.id%>_votes'><%= pluralize(post.total_votes, "vote") %></span>
+    <span id='post_<%=post.slug%>_votes'><%= pluralize(post.total_votes, "vote") %></span>
     <br/>
     <% if logged_in? %>
       <%= link_to vote_post_path(post, vote: false), method: 'post', remote: true do %>
@@ -17,7 +17,7 @@
 
   <div class='span8 well'>
     <%= render post.categories %>
-    <h4><%= link_to post.title, post_path(post.id) %></h4>
+    <h4><%= link_to post.title, post_path(post) %></h4>
     <p>
       <%= link_to post.url, fix_url(post.url) %>:
       <%= post.description %>
@@ -35,7 +35,7 @@
     </p>
 
     <p>
-      <em><%= link_to pluralize(post.comments.size, "comment"), post_path(post.id) %></em>
+      <em><%= link_to pluralize(post.comments.size, "comment"), post_path(post) %></em>
     </p>
 
   </div>
