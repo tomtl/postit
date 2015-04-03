@@ -1,3 +1,4 @@
+<!--voting-->
 <div class="row">
   <div class='span0 well text-center'>
     <% if logged_in? %>
@@ -15,6 +16,7 @@
     <% end %>
   </div>
 
+  <!--post-->
   <div class='span8 well'>
     <%= render post.categories %>
     <h4><%= link_to post.title, post_path(post) %></h4>
@@ -23,17 +25,20 @@
       <%= post.description %>
     </p>
 
+    <!--edit-->
     <% if current_user == post.creator %>
       <p class='pull-right'>
         <%= link_to 'edit this post', edit_post_path(post) %>
       </p>
     <% end %>
 
+    <!--posted by at-->
     <p>
       <span class='quiet'>posted by </span><%= link_to post.creator.username, user_path(post.creator) %>
       <small>at <%= display_datetime post.created_at %>.</small>
     </p>
 
+    <!--comments-->
     <p>
       <em><%= link_to pluralize(post.comments.size, "comment"), post_path(post) %></em>
     </p>
