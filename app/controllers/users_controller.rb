@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     
     if @user.save
       flash[:notice] = "User has been saved."
-      session[:user_id] = @user.id
+      session[:user_slug] = @user.slug
       redirect_to root_path
     else
       render :new
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
     end
     
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find_by slug: params[:id]
     end
     
     def require_same_user
