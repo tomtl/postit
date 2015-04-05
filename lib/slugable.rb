@@ -3,15 +3,20 @@ module Slugable
 
   included do
     before_save :generate_slug!
+    class_attribute :slug_column
+  end
+
+  def to_param
+    self.slug
   end
 
   def generate_slug!
-    the_slug = to_slug(self.title)
-    post = Post.find_by slug: the_slug
+    the_slug = to_slug(self.send(self.class.slug_column.to_sym))
+    obj = self.class.find_by slug: the_slug
     count = 2
-    while post && post != self
+    while obj && obj != self
       the_slug = append_suffix(the_slug, count)
-      post = Post.find_by slug: the_slug
+      obj = self.class.find_by slug: the_slug
       count += 1
     end
     self.slug = the_slug.downcase
@@ -30,5 +35,11 @@ module Slugable
     initial_slug.gsub! /\s*[^A-Za-z0-9]\s*/, '-'
     initial_slug.gsub! /-+/, "-"
     initial_slug.downcase
+  end
+
+  module ClassMethods
+    def slugable_column(column_name)
+      self.slug_column = column_name
+    end
   end
 end

@@ -11,7 +11,5 @@ class Post < ActiveRecord::Base
   validates :description, presence: true
   validates :url, presence: true, uniqueness: true
 
-  def to_param
-    self.slug
-  end
+  slugable_column :title
 end
