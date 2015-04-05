@@ -13,6 +13,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'voteable_tom_apr15'
 
 group :doc do
   gem 'sdoc', require: false
@@ -22,6 +23,7 @@ group :development do
   gem 'quiet_assets'
   gem 'pry'
   gem 'sqlite3'
+  gem 'gemcutter', '= 0.7.1'
 end
 
 group :production do
