@@ -26,11 +26,7 @@
     </p>
 
     <!--edit-->
-    <% if current_user == post.creator %>
-      <p class='pull-right'>
-        <%= link_to 'edit this post', edit_post_path(post) %>
-      </p>
-    <% end %>
+    <%= render 'edit_link', post: post %>
 
     <!--posted by at-->
     <p>

@@ -12,4 +12,5 @@ class Post < ActiveRecord::Base
   validates :url, presence: true, uniqueness: true
 
   slugable_column :title
+  
 end
