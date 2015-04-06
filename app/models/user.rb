@@ -13,4 +13,12 @@ class User < ActiveRecord::Base
   before_save :generate_slug!
 
   slugable_column :username
+  
+  def admin?
+    self.role == 'admin'
+  end
+  
+  def moderator?
+    self.role == 'moderator'
+  end
 end
